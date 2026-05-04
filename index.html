@@ -1,986 +1,604 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>杰哥工作室 - JieGe Studio | SimpleLang Programming Language</title>
+    <title>SimpLang - 一小时速成的简易编程语言</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #1e1e35;
-            --text-primary: #e8e8f0;
-            --text-secondary: #a0a0b8;
-            --text-muted: #6a6a80;
-            --accent: #6c5ce7;
-            --accent-light: #a29bfe;
-            --accent-glow: rgba(108, 92, 231, 0.3);
-            --success: #00cec9;
-            --warning: #fdcb6e;
-            --danger: #ff7675;
-            --border: #2a2a3a;
-            --border-light: #333348;
-            --radius: 12px;
-            --radius-lg: 20px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
+            color: #1e1e2f;
+            background: #fafbfc;
         }
 
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--accent);
-            opacity: 0.12;
-            animation: floatUp linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.12;
-            }
-            90% {
-                opacity: 0.12;
-            }
-            100% {
-                transform: translateY(-100px) scale(1.5);
-                opacity: 0;
-            }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 0 2rem;
-            transition: var(--transition);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 65px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
+            gap: 8px;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.8rem;
+            letter-spacing: -0.02em;
+            color: #0f172a;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        .logo span {
+            background: #3b82f6;
             color: white;
-            box-shadow: 0 4px 15px var(--accent-glow);
-            letter-spacing: -1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 8px;
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            gap: 32px;
+            font-weight: 500;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
-            color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            position: relative;
+            color: #334155;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: #3b82f6;
         }
 
         .lang-switch {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 7px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            font-family: inherit;
-            font-weight: 500;
+            background: #f1f5f9;
+            border-radius: 30px;
+            padding: 4px;
+            display: flex;
+            gap: 4px;
         }
 
-        .lang-switch:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--accent);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
+        .lang-btn {
+            background: transparent;
             border: none;
-            color: var(--text-primary);
-            font-size: 1.6rem;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: 600;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            color: #475569;
         }
 
-        .mobile-menu-btn:hover {
-            background: var(--bg-card);
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 7px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            color: var(--accent-light);
-            margin-bottom: 1.5rem;
-            animation: fadeInDown 0.8s ease-out;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-title .gradient-text {
-            background: linear-gradient(135deg, var(--accent-light), var(--success), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
+        .lang-btn.active {
+            background: #3b82f6;
+            color: white;
         }
 
         .btn {
-            padding: 13px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), #7c6ff7);
+            display: inline-block;
+            background: #3b82f6;
             color: white;
-            box-shadow: 0 8px 30px var(--accent-glow);
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(108, 92, 231, 0.45);
+        .btn:hover {
+            background: #2563eb;
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border-light);
+            color: #3b82f6;
+            border: 1.5px solid #3b82f6;
         }
 
         .btn-outline:hover {
-            border-color: var(--accent);
-            background: var(--bg-card);
-            transform: translateY(-3px);
+            background: #3b82f6;
+            color: white;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .code-demo-section {
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .code-demo-container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .code-header {
+        .hero {
             display: flex;
             align-items: center;
-            padding: 14px 20px;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            gap: 8px;
+            justify-content: space-between;
+            padding: 60px 0 40px;
+            gap: 40px;
+            flex-wrap: wrap;
         }
 
-        .code-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
         }
 
-        .code-dot.red { background: #ff5f56; }
-        .code-dot.yellow { background: #ffbd2e; }
-        .code-dot.green { background: #27ca40; }
-
-        .code-title {
-            margin-left: 12px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: #0f172a;
         }
 
-        .code-body {
-            padding: 28px;
+        .hero .highlight {
+            color: #3b82f6;
+            border-bottom: 3px solid #bfdbfe;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 32px;
+            max-width: 550px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-code {
+            flex: 1;
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
             overflow-x: auto;
         }
 
-        .code-body pre {
+        .hero-code pre {
             margin: 0;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 0.88rem;
-            line-height: 1.9;
+            color: #e2e8f0;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        .code-body code {
-            color: var(--text-primary);
-        }
-
-        .token-keyword { color: #c792ea; }
-        .token-string { color: #c3e88d; }
-        .token-comment { color: #546e7a; font-style: italic; }
-        .token-number { color: #f78c6c; }
-        .token-func { color: #82aaff; }
-        .token-builtin { color: #ffcb6b; }
-
-        .section-py {
-            padding: 5rem 2rem;
-            position: relative;
-            z-index: 1;
-        }
+        .hero-code .keyword { color: #c084fc; }
+        .hero-code .func { color: #6ee7b7; }
+        .hero-code .string { color: #fbbf24; }
+        .hero-code .comment { color: #94a3b8; }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.5px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 3.5rem;
-            font-size: 1.05rem;
+            margin-bottom: 48px;
+            color: #0f172a;
         }
 
         .features-grid {
-            max-width: 1100px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
 
         .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem 1.75rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            background: white;
+            padding: 28px 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f6;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .feature-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--success));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
         }
 
         .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
-            color: var(--accent-light);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
         }
 
         .feature-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #0f172a;
         }
 
         .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.7;
+            color: #475569;
         }
 
-        .team-section {
-            background: var(--bg-secondary);
+        .code-showcase {
+            background: #0f172a;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 60px 0;
+            color: #e2e8f0;
+            overflow-x: auto;
         }
 
-        .team-grid {
-            max-width: 750px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .team-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1.25rem;
-            background: linear-gradient(135deg, var(--accent), #7c6ff7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+        .code-showcase h2 {
             color: white;
-            font-weight: 700;
-            letter-spacing: 2px;
+            margin-bottom: 24px;
+            font-size: 2rem;
         }
 
-        .team-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.2rem;
+        .code-block {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
         }
 
-        .team-role {
-            color: var(--accent-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-            font-weight: 500;
+        .code-block pre {
+            margin: 0;
+            font-family: 'Menlo', monospace;
+            font-size: 0.95rem;
         }
 
-        .team-bio {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .links-grid {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .link-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem 1.75rem;
+        .download-section {
             text-align: center;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: var(--transition);
-            display: block;
+            padding: 60px 0;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 100%);
+            border-radius: 40px;
+            margin: 40px 0;
         }
 
-        .link-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        .download-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
         }
 
-        .link-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-            display: block;
+        .download-section p {
+            color: #475569;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .link-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .link-card p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .link-url {
-            display: block;
-            color: var(--accent-light);
-            font-size: 0.78rem;
-            margin-top: 0.75rem;
-            word-break: break-all;
-            font-family: monospace;
-        }
-
-        .version-info {
-            text-align: center;
-            padding: 3rem 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 10px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .version-number {
-            color: var(--accent-light);
-            font-weight: 700;
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 2.5rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer p {
-            margin-bottom: 0.4rem;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px 0;
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .footer a {
-            color: var(--accent-light);
+            color: #3b82f6;
             text-decoration: none;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 0.95rem;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 65px;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 15, 0.97);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+            .hero {
                 flex-direction: column;
-                padding: 1.5rem;
-                border-bottom: 1px solid var(--border);
-                gap: 1rem;
+                padding: 30px 0;
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .section-title {
-                font-size: 1.75rem;
-            }
-
-            .features-grid,
-            .links-grid,
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .code-body {
-                padding: 16px;
-            }
-
-            .code-body pre {
-                font-size: 0.72rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.7rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
+            .hero h1 {
+                font-size: 2.5rem;
             }
             .navbar {
-                padding: 0 1rem;
+                flex-direction: column;
+                align-items: stretch;
             }
-        }
-
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        ::selection {
-            background: var(--accent);
-            color: white;
+            .nav-links {
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-particles" id="particles"></div>
-
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">JG</div>
-                <span data-lang-zh="杰哥工作室" data-lang-en="JieGe Studio">杰哥工作室</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#features" data-lang-zh="功能" data-lang-en="Features">功能</a></li>
-                <li><a href="#team" data-lang-zh="团队" data-lang-en="Team">团队</a></li>
-                <li><a href="#links" data-lang-zh="链接" data-lang-en="Links">链接</a></li>
-                <li><a href="https://jie240.github.io/SimpleLangIDE/" target="_blank" data-lang-zh="官网" data-lang-en="Website">官网</a></li>
-                <li>
-                    <button class="lang-switch" onclick="toggleLang()" id="langBtn">EN</button>
-                </li>
-            </ul>
-            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="菜单">&#9776;</button>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge" data-lang-zh="SimpleLang v1.0" data-lang-en="SimpleLang v1.0">SimpleLang v1.0</div>
-            <h1 class="hero-title">
-                <span data-lang-zh="世界上最" data-lang-en="The World's Most">世界上最</span>
-                <span class="gradient-text" data-lang-zh="像C语言的" data-lang-en="C-like">像C语言的</span>
-                <span data-lang-zh="编程语言" data-lang-en="Programming Language">编程语言</span>
-            </h1>
-            <p class="hero-subtitle" data-lang-zh="SimpleLang 是杰哥工作室开发的一款现代化编程语言，支持完整语法、C 语言转译、网络请求、文件操作、正则表达式、数据库访问、加密解密、JSON 解析等功能。" data-lang-en="SimpleLang is a modern programming language developed by JieGe Studio, featuring full syntax support, C code compilation, HTTP requests, file operations, regex, database access, encryption, JSON parsing and more.">SimpleLang 是杰哥工作室开发的一款现代化编程语言，支持完整语法、C 语言转译、网络请求、文件操作、正则表达式、数据库访问、加密解密、JSON 解析等功能。</p>
-            <div class="hero-buttons">
-                <a href="https://jie240.github.io/SimpleLangIDE/" class="btn btn-primary" target="_blank">
-                    <span data-lang-zh="官方网站" data-lang-en="Official Website">官方网站</span>
-                </a>
-                <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" class="btn btn-outline" target="_blank">
-                    <span data-lang-zh="技术文档" data-lang-en="Documentation">技术文档</span>
-                </a>
-                <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" class="btn btn-outline" target="_blank">
-                    <span data-lang-zh="官方博客" data-lang-en="Blog">官方博客</span>
-                </a>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                SimpLang <span>v1.0</span>
             </div>
-        </div>
-    </section>
-
-    <section class="code-demo-section">
-        <div class="code-demo-container">
-            <div class="code-header">
-                <span class="code-dot red"></span>
-                <span class="code-dot yellow"></span>
-                <span class="code-dot green"></span>
-                <span class="code-title">example.sl -- SimpleLang v1.0</span>
+            <div class="nav-links">
+                <a href="#features" data-key="nav_features">特性</a>
+                <a href="#examples" data-key="nav_examples">示例</a>
+                <a href="#download" data-key="nav_download">下载</a>
+                <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" target="_blank" data-key="nav_docs">文档</a>
+                <!-- 新增博客链接 -->
+                <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" target="_blank" data-key="nav_blog">博客</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
             </div>
-            <div class="code-body">
-                <pre><code><span class="token-comment">// SimpleLang v1.0 示例代码</span>
-<span class="token-keyword">import</span> <span class="token-string">"math"</span>;
+            <div>
+                <a href="#download" class="btn" data-key="nav_download_btn">免费下载</a>
+            </div>
+        </nav>
 
-<span class="token-comment">// 定义函数</span>
-<span class="token-keyword">func</span> <span class="token-func">fibonacci</span>(n) {
-    <span class="token-keyword">if</span> (n <= 1) {
-        <span class="token-keyword">return</span> n;
-    }
-    <span class="token-keyword">return</span> <span class="token-func">fibonacci</span>(n - 1) + <span class="token-func">fibonacci</span>(n - 2);
+        <section class="hero">
+            <div class="hero-content">
+                <h1><span data-key="hero_title1">像 C 一样简单，</span><br><span class="highlight" data-key="hero_title2">一小时速成</span><span data-key="hero_title3">的编程语言</span></h1>
+                <p data-key="hero_desc">SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，让编程回归乐趣。</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn" data-key="hero_btn1">下载 SimpLang IDE</a>
+                    <a href="#examples" class="btn btn-outline" data-key="hero_btn2">查看示例</a>
+                </div>
+            </div>
+            <div class="hero-code">
+                <pre><code><span class="comment">// 计算斐波那契数列 —— 递归如此简单</span>
+<span class="keyword">func</span> <span class="func">fib</span>(n) {
+    <span class="keyword">if</span> (n &lt;= 1) { <span class="keyword">return</span> n; }
+    <span class="keyword">return</span> fib(n-1) + fib(n-2);
 }
 
-<span class="token-comment">// 变量声明和数组操作</span>
-<span class="token-keyword">var</span> arr = [<span class="token-number">1</span>, <span class="token-number">2</span>, <span class="token-number">3</span>, <span class="token-number">4</span>, <span class="token-number">5</span>];
-<span class="token-builtin">array_push</span>(arr, <span class="token-number">6</span>);
-<span class="token-builtin">print</span>(<span class="token-string">"数组: ", <span class="token-builtin">array_join</span>(arr, <span class="token-string">", "</span>));
+<span class="keyword">var</span> i = 0;
+<span class="keyword">while</span> (i &lt; 10) {
+    <span class="keyword">print</span> <span class="string">"fib("</span>, i, <span class="string">") = "</span>, fib(i), <span class="string">"\n"</span>;
+    i = i + 1;
+}</code></pre>
+            </div>
+        </section>
 
-<span class="token-comment">// 网络请求</span>
-<span class="token-keyword">var</span> response = <span class="token-builtin">http_get</span>(<span class="token-string">"https://api.github.com"</span>);
-<span class="token-builtin">print</span>(<span class="token-string">"状态码: "</span>, response[<span class="token-string">"status"</span>]);
+        <section id="features">
+            <h2 class="section-title" data-key="features_title">为什么选择 SimpLang？</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 data-key="feature1_title">极简语法</h3>
+                    <p data-key="feature1_desc">花括号、分号、熟悉的控制流，但无需类型声明。有 C 基础者 30 分钟上手。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3 data-key="feature2_title">动态类型</h3>
+                    <p data-key="feature2_desc">变量自动推导，支持数字、字符串、数组。专注逻辑，而非内存管理。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖥️</div>
+                    <h3 data-key="feature3_title">自带 IDE</h3>
+                    <p data-key="feature3_desc">语法高亮、一键运行、输入对话框，开箱即用的图形化开发环境。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3 data-key="feature4_title">一键打包 EXE</h3>
+                    <p data-key="feature4_desc">写完代码，直接生成独立的 Windows 可执行文件，分享给任何人运行。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 data-key="feature5_title">完整递归支持</h3>
+                    <p data-key="feature5_desc">词法作用域、函数是一等公民，递归、闭包轻松实现。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 data-key="feature6_title">开源 & 可扩展</h3>
+                    <p data-key="feature6_desc">解释器由 Python 编写，易于修改和嵌入到你的项目中。</p>
+                </div>
+            </div>
+        </section>
 
-<span class="token-comment">// JSON 解析</span>
-<span class="token-keyword">var</span> data = <span class="token-builtin">json_parse</span>(<span class="token-string">'{"name":"SimpleLang","version":"1.0"}'</span>);
-<span class="token-builtin">print</span>(<span class="token-string">"名称: "</span>, data[<span class="token-string">"name"</span>]);
-
-<span class="token-comment">// 加密</span>
-<span class="token-keyword">var</span> hash = <span class="token-builtin">hash_sha256</span>(<span class="token-string">"SimpleLang"</span>);
-<span class="token-builtin">print</span>(<span class="token-string">"SHA256: "</span>, <span class="token-builtin">str_substring</span>(hash, 0, 16), <span class="token-string">"..."</span>);
-
-<span class="token-comment">// for-in 循环</span>
-<span class="token-keyword">for</span> (<span class="token-keyword">var</span> item <span class="token-keyword">in</span> arr) {
-    <span class="token-builtin">print</span>(<span class="token-string">"fibonacci("</span>, item, <span class="token-string">") = "</span>, <span class="token-func">fibonacci</span>(item));
+        <section id="examples" class="code-showcase">
+            <h2 data-key="examples_title">✏️ 更多代码示例</h2>
+            <div class="code-block">
+                <pre><code><span class="comment">// 数组与循环</span>
+<span class="keyword">var</span> arr[5];
+<span class="keyword">var</span> i = 0;
+<span class="keyword">while</span> (i &lt; 5) {
+    arr[i] = i * i;
+    i = i + 1;
+}
+<span class="keyword">print</span> <span class="string">"平方数组: "</span>;
+i = 0;
+<span class="keyword">while</span> (i &lt; 5) {
+    <span class="keyword">print</span> arr[i], <span class="string">" "</span>;
+    i = i + 1;
 }
 
-<span class="token-comment">// 文件操作</span>
-<span class="token-builtin">file_write</span>(<span class="token-string">"output.txt"</span>, <span class="token-string">"Hello SimpleLang!"</span>);
-<span class="token-builtin">print</span>(<span class="token-string">"文件已保存"</span>);</code></pre>
-            </div>
-        </div>
-    </section>
+<span class="comment">// 字符串与输入</span>
+<span class="keyword">var</span> name;
+<span class="keyword">print</span> <span class="string">"你叫什么名字？"</span>;
+<span class="keyword">input_str</span> name;
+<span class="keyword">print</span> <span class="string">"你好, "</span>, name, <span class="string">"！"</span>;
 
-    <section class="section-py" id="features">
-        <h2 class="section-title" data-lang-zh="核心功能" data-lang-en="Core Features">核心功能</h2>
-        <p class="section-subtitle" data-lang-zh="SimpleLang v1.0 提供丰富的内置功能" data-lang-en="SimpleLang v1.0 provides rich built-in features">SimpleLang v1.0 提供丰富的内置功能</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">&lt;/&gt;</span>
-                <h3 data-lang-zh="完整语法支持" data-lang-en="Full Syntax">完整语法支持</h3>
-                <p data-lang-zh="变量声明、条件判断、循环、函数定义、数组、字典等完整语法结构" data-lang-en="Variable declarations, conditionals, loops, functions, arrays, dictionaries and more">变量声明、条件判断、循环、函数定义、数组、字典等完整语法结构</p>
+<span class="comment">// 内置函数</span>
+<span class="keyword">var</span> numStr = <span class="string">"123"</span>;
+<span class="keyword">var</span> num = to_int(numStr);
+<span class="keyword">print</span> <span class="string">"转换后的数字: "</span>, num;</code></pre>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">{ }</span>
-                <h3 data-lang-zh="C 语言转译" data-lang-en="C Code Generation">C 语言转译</h3>
-                <p data-lang-zh="将 SimpleLang 代码自动转译为 C 语言源码，方便编译和部署" data-lang-en="Automatically compile SimpleLang code into C source code for easy deployment">将 SimpleLang 代码自动转译为 C 语言源码，方便编译和部署</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">&#8593;&#8595;</span>
-                <h3 data-lang-zh="网络请求" data-lang-en="HTTP Requests">网络请求</h3>
-                <p data-lang-zh="内置 http_get 和 http_post 函数，轻松进行网络数据交互" data-lang-en="Built-in http_get and http_post functions for easy network communication">内置 http_get 和 http_post 函数，轻松进行网络数据交互</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">[ ]</span>
-                <h3 data-lang-zh="JSON 解析" data-lang-en="JSON Parsing">JSON 解析</h3>
-                <p data-lang-zh="支持 json_parse 和 json_stringify，无缝处理 JSON 数据格式" data-lang-en="Support json_parse and json_stringify for seamless JSON data handling">支持 json_parse 和 json_stringify，无缝处理 JSON 数据格式</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">#</span>
-                <h3 data-lang-zh="加密解密" data-lang-en="Encryption">加密解密</h3>
-                <p data-lang-zh="内置 MD5、SHA1、SHA256 哈希和 Base64 编解码功能" data-lang-en="Built-in MD5, SHA1, SHA256 hashing and Base64 encoding/decoding">内置 MD5、SHA1、SHA256 哈希和 Base64 编解码功能</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">.*</span>
-                <h3 data-lang-zh="正则表达式" data-lang-en="Regex Support">正则表达式</h3>
-                <p data-lang-zh="支持 regex_match、regex_replace、regex_test 正则操作" data-lang-en="Support regex_match, regex_replace, and regex_test operations">支持 regex_match、regex_replace、regex_test 正则操作</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">DB</span>
-                <h3 data-lang-zh="数据库访问" data-lang-en="Database Access">数据库访问</h3>
-                <p data-lang-zh="集成 SQLite 数据库，支持 db_open、db_query、db_execute 操作" data-lang-en="Integrated SQLite database with db_open, db_query, and db_execute">集成 SQLite 数据库，支持 db_open、db_query、db_execute 操作</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">f(x)</span>
-                <h3 data-lang-zh="文件系统操作" data-lang-en="File System">文件系统操作</h3>
-                <p data-lang-zh="支持文件读写、追加、删除、目录操作等完整文件系统接口" data-lang-en="Full file system API: read, write, append, delete, and directory operations">支持文件读写、追加、删除、目录操作等完整文件系统接口</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section-py team-section" id="team">
-        <h2 class="section-title" data-lang-zh="团队成员" data-lang-en="Team Members">团队成员</h2>
-        <p class="section-subtitle" data-lang-zh="杰哥工作室核心开发者" data-lang-en="Core developers of JieGe Studio">杰哥工作室核心开发者</p>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-avatar">JIE</div>
-                <h3>杰哥</h3>
-                <p class="team-role" data-lang-zh="创始人 / 核心开发者" data-lang-en="Founder / Core Developer">创始人 / 核心开发者</p>
-                <p class="team-bio" data-lang-zh="SimpleLang 语言设计者，负责语言核心架构与编译器开发" data-lang-en="Designer of SimpleLang language, responsible for core architecture and compiler development">SimpleLang 语言设计者，负责语言核心架构与编译器开发</p>
+        <section id="download" class="download-section">
+            <h2 data-key="download_title">🚀 立即开始使用 SimpLang</h2>
+            <p data-key="download_desc">包含完整 IDE 和命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享。</p>
+            <div class="download-buttons">
+                <a href="https://exe1.webgetstore.com/2026/04/18/8c78ee2e0e076d506ec96fc3c22865ed.exe?sg=9d914afb52d5bcde967ef008d9bf7fcb&e=69e32c79&fileName=SimpleLangIDE%20v1.0.exe&fi=283160994" class="btn" style="padding: 14px 36px; font-size: 1.1rem;" data-key="download_btn">⬇️ 下载 SimpLang IDE (Windows)</a>
+                <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" target="_blank" class="btn btn-outline" style="padding: 14px 36px; font-size: 1.1rem;" data-key="download_docs_btn">📖 查看文档</a>
             </div>
-            <div class="team-card">
-                <div class="team-avatar">祎</div>
-                <h3>祎个小西瓜_</h3>
-                <p class="team-role" data-lang-zh="联合创始人 / 开发者" data-lang-en="Co-founder / Developer">联合创始人 / 开发者</p>
-                <p class="team-bio" data-lang-zh="负责标准库开发、文档编写与社区维护和编译" data-lang-en="Responsible for standard library development, documentation and community maintenance">负责标准库开发、文档编写与社区维护</p>
+            <p style="margin-top: 24px; font-size: 0.9rem;" data-key="download_note">当前版本 v1.0.0 · 需要 Windows 7 及以上 · 无需安装 Python</p>
+        </section>
+
+        <footer class="footer">
+            <div data-key="footer_copyright">© 2025 SimpLang 团队 · 基于 MIT 协议开源</div>
+            <div>
+                <a href="https://github.com/jie240/SimpleLangIDE" target="_blank">GitHub</a> · 
+                <a>问题反馈:137196836@qq.com</a> 
             </div>
-        </div>
-    </section>
-
-    <section class="section-py" id="links">
-        <h2 class="section-title" data-lang-zh="相关链接" data-lang-en="Related Links">相关链接</h2>
-        <p class="section-subtitle" data-lang-zh="SimpleLang 项目资源" data-lang-en="SimpleLang Project Resources">SimpleLang 项目资源</p>
-        <div class="links-grid">
-            <a href="https://jie240.github.io/SimpleLang/" class="link-card" target="_blank">
-                <span class="link-icon">&#127760;</span>
-                <h3 data-lang-zh="官方网站" data-lang-en="Official Website">官方网站</h3>
-                <p data-lang-zh="SimpleLang IDE 官方主页" data-lang-en="SimpleLang IDE Official Homepage">SimpleLang IDE 官方主页</p>
-                <span class="link-url">jie240.github.io/SimpleLangIDE/</span>
-            </a>
-            <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" class="link-card" target="_blank">
-                <span class="link-icon">&#128214;</span>
-                <h3 data-lang-zh="技术文档" data-lang-en="Documentation">技术文档</h3>
-                <p data-lang-zh="完整语言参考与 API 文档" data-lang-en="Complete Language Reference & API Docs">完整语言参考与 API 文档</p>
-                <span class="link-url">jie240.github.io/SimpleLangIDE-s-manual/</span>
-            </a>
-            <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" class="link-card" target="_blank">
-                <span class="link-icon">&#128221;</span>
-                <h3 data-lang-zh="官方博客" data-lang-en="Blog">官方博客</h3>
-                <p data-lang-zh="开发日志、更新公告与技术分享" data-lang-en="Dev Logs, Updates & Technical Articles">开发日志、更新公告与技术分享</p>
-                <span class="link-url">jie240.github.io/SimpleLangIDE-s-Blog/</span>
-            </a>
-        </div>
-    </section>
-
-    <div class="version-info">
-        <span class="version-badge">
-            SimpleLang <span class="version-number">v1.0</span> -- 
-            <span data-lang-zh="杰哥工作室出品" data-lang-en="By JieGe Studio">杰哥工作室出品</span>
-        </span>
+        </footer>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2024 <a href="https://jie240.github.io/SimpleLangIDE/" target="_blank">杰哥工作室 (JieGe Studio)</a>. <span data-lang-zh="保留所有权利。" data-lang-en="All rights reserved.">保留所有权利。</span></p>
-        <p>
-            <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" target="_blank" data-lang-zh="文档" data-lang-en="Docs">文档</a>
-            &nbsp;|&nbsp;
-            <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" target="_blank" data-lang-zh="博客" data-lang-en="Blog">博客</a>
-            &nbsp;|&nbsp;
-            <a href="https://jie240.github.io/SimpleLangIDE/" target="_blank" data-lang-zh="官网" data-lang-en="Website">官网</a>
-        </p>
-    </footer>
-
     <script>
-        // 背景粒子
-        const particlesContainer = document.getElementById('particles');
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            const size = Math.random() * 3 + 1;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = Math.random() * 15 + 10 + 's';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particlesContainer.appendChild(particle);
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 30000);
-        }
-        for (let i = 0; i < 40; i++) {
-            setTimeout(createParticle, Math.random() * 5000);
-        }
-        setInterval(() => {
-            if (particlesContainer.children.length < 50) {
-                createParticle();
+        // 多语言文本库
+        const translations = {
+            zh: {
+                // 导航
+                nav_features: "特性",
+                nav_examples: "示例",
+                nav_download: "下载",
+                nav_docs: "文档",
+                nav_blog: "博客",          // 新增博客翻译
+                nav_download_btn: "免费下载",
+                // Hero
+                hero_title1: "像 C 一样简单，",
+                hero_title2: "一小时速成",
+                hero_title3: "的编程语言",
+                hero_desc: "SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，让编程回归乐趣。",
+                hero_btn1: "下载 SimpLang IDE",
+                hero_btn2: "查看示例",
+                // Features
+                features_title: "为什么选择 SimpLang？",
+                feature1_title: "极简语法",
+                feature1_desc: "花括号、分号、熟悉的控制流，但无需类型声明。有 C 基础者 30 分钟上手。",
+                feature2_title: "动态类型",
+                feature2_desc: "变量自动推导，支持数字、字符串、数组。专注逻辑，而非内存管理。",
+                feature3_title: "自带 IDE",
+                feature3_desc: "语法高亮、一键运行、输入对话框，开箱即用的图形化开发环境。",
+                feature4_title: "一键打包 EXE",
+                feature4_desc: "写完代码，直接生成独立的 Windows 可执行文件，分享给任何人运行。",
+                feature5_title: "完整递归支持",
+                feature5_desc: "词法作用域、函数是一等公民，递归、闭包轻松实现。",
+                feature6_title: "开源 & 可扩展",
+                feature6_desc: "解释器由 Python 编写，易于修改和嵌入到你的项目中。",
+                // Examples
+                examples_title: "✏️ 更多代码示例",
+                // Download
+                download_title: "🚀 立即开始使用 SimpLang",
+                download_desc: "包含完整 IDE 和命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享。",
+                download_btn: "⬇️ 下载 SimpLang IDE (Windows)",
+                download_docs_btn: "📖 查看文档",
+                download_note: "当前版本 v1.0.0 · 需要 Windows 7 及以上 · 无需安装 Python",
+                // Footer
+                footer_copyright: "© 2025 SimpLang 团队 · 基于 MIT 协议开源",
+                footer_feedback: "问题反馈",
+                footer_contribute: "贡献指南"
+            },
+            en: {
+                nav_features: "Features",
+                nav_examples: "Examples",
+                nav_download: "Download",
+                nav_docs: "Docs",
+                nav_blog: "Blog",          // 新增博客翻译
+                nav_download_btn: "Free Download",
+                hero_title1: "Simple as C, ",
+                hero_title2: "Learn in 1 Hour",
+                hero_title3: "",
+                hero_desc: "SimpLang keeps C's clean syntax, removes complex pointers and type declarations. Built-in IDE, one-click EXE packaging, bringing fun back to programming.",
+                hero_btn1: "Download SimpLang IDE",
+                hero_btn2: "View Examples",
+                features_title: "Why SimpLang?",
+                feature1_title: "Minimal Syntax",
+                feature1_desc: "Curly braces, semicolons, familiar control flow, but no type declarations. 30 minutes if you know C.",
+                feature2_title: "Dynamic Typing",
+                feature2_desc: "Auto type inference, supports numbers, strings, arrays. Focus on logic, not memory management.",
+                feature3_title: "Built-in IDE",
+                feature3_desc: "Syntax highlighting, one-click run, input dialog, graphical dev environment out of the box.",
+                feature4_title: "One-click EXE",
+                feature4_desc: "After writing code, directly generate standalone Windows executable, share with anyone.",
+                feature5_title: "Full Recursion",
+                feature5_desc: "Lexical scoping, functions as first-class citizens, easy recursion and closures.",
+                feature6_title: "Open Source & Extensible",
+                feature6_desc: "Interpreter written in Python, easy to modify and embed in your projects.",
+                examples_title: "✏️ More Code Examples",
+                download_title: "🚀 Get Started with SimpLang",
+                download_desc: "Includes full IDE and command-line interpreter, supports Windows / macOS / Linux. One-click package, share instantly.",
+                download_btn: "⬇️ Download SimpLang IDE (Windows)",
+                download_docs_btn: "📖 Read Docs",
+                download_note: "Current version v1.0.0 · Requires Windows 7 or later · No Python installation needed",
+                footer_copyright: "© 2025 SimpLang Team · Open source under MIT",
+                footer_feedback: "Feedback",
+                footer_contribute: "Contribute"
             }
-        }, 2000);
+        };
 
-        // 语言切换
         let currentLang = 'zh';
-        function toggleLang() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            const btn = document.getElementById('langBtn');
-            btn.textContent = currentLang === 'zh' ? 'EN' : '中文';
-            document.querySelectorAll('[data-lang-zh]').forEach(el => {
-                if (el.getAttribute('data-lang-' + currentLang)) {
-                    el.textContent = el.getAttribute('data-lang-' + currentLang);
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            // 更新所有带 data-key 的元素文本
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    // 保留内部可能存在的图标或特殊字符
+                    if (el.tagName === 'A' && (key === 'nav_docs' || key === 'nav_blog')) {
+                        // 特殊处理：保持链接不变，只改文本
+                        el.textContent = translations[lang][key];
+                    } else if (el.tagName === 'BUTTON') {
+                        // 按钮文字
+                        el.textContent = translations[lang][key];
+                    } else {
+                        // 普通元素，但可能需要保留子元素？这里简单处理，但 hero_title 有三个span，需要分别处理
+                        // 对于普通元素直接替换 innerText 会丢失内部结构，但我们的 data-key 都在叶子节点或单独元素上，可行
+                        // 注意 hero 标题是分开的 span，每个都有 data-key，所以没问题
+                        el.innerText = translations[lang][key];
+                    }
                 }
             });
+            // 更新按钮 active 样式
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            // 更新 html lang 属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
         }
 
-        // 移动端菜单
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // 点击导航链接关闭菜单
-        document.querySelectorAll('#navLinks a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+        // 绑定语言切换事件
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = btn.getAttribute('data-lang');
+                setLanguage(lang);
             });
         });
 
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.boxShadow = 'none';
-            }
+        // 初始化中文
+        setLanguage('zh');
+
+        // 平滑滚动 (修复内部锚点)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === "#" || href === "") return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
-
 </body>
 </html>
