@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimpLang - 一小时速成的简易编程语言</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SimpLang - 极简 · 速成 · 可打包 | 新一代脚本语言</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,304 +16,316 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #1e1e2f;
-            background: #fafbfc;
+            line-height: 1.5;
+            color: #0a0c12;
+            background: #ffffff;
+            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
         }
 
+        /* navbar 高级感 */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 24px 0 20px;
+            border-bottom: 1px solid #eef2f6;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
+            backdrop-filter: blur(0px);
+            background: rgba(255,255,255,0.96);
         }
 
         .logo {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 1.8rem;
-            letter-spacing: -0.02em;
-            color: #0f172a;
+            align-items: baseline;
+            gap: 6px;
+            font-weight: 800;
+            font-size: 1.9rem;
+            letter-spacing: -0.03em;
+            color: #0a0c12;
         }
-
         .logo span {
-            background: #3b82f6;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-left: 8px;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            letter-spacing: normal;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             font-weight: 500;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .nav-links a {
             text-decoration: none;
-            color: #334155;
-            transition: color 0.2s;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
         }
-
         .nav-links a:hover {
-            color: #3b82f6;
+            color: #2563eb;
         }
 
         .lang-switch {
             background: #f1f5f9;
-            border-radius: 30px;
+            border-radius: 40px;
             padding: 4px;
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
-
         .lang-btn {
             background: transparent;
             border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
+            padding: 6px 16px;
+            border-radius: 32px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.85rem;
+            transition: 0.2s;
+            font-size: 0.8rem;
             color: #475569;
         }
-
         .lang-btn.active {
-            background: #3b82f6;
+            background: #2563eb;
             color: white;
+            box-shadow: 0 2px 6px rgba(37,99,235,0.2);
         }
 
         .btn {
             display: inline-block;
-            background: #3b82f6;
+            background: #0f172a;
             color: white;
             font-weight: 600;
-            padding: 10px 22px;
-            border-radius: 40px;
+            padding: 12px 28px;
+            border-radius: 44px;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: all 0.25s;
             border: none;
-            cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-
-        .btn:hover {
+        .btn-primary {
             background: #2563eb;
+            box-shadow: 0 4px 10px rgba(37,99,235,0.2);
         }
-
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(37,99,235,0.35);
+        }
         .btn-outline {
             background: transparent;
-            color: #3b82f6;
-            border: 1.5px solid #3b82f6;
+            color: #2563eb;
+            border: 1.5px solid #2563eb;
+            box-shadow: none;
         }
-
         .btn-outline:hover {
-            background: #3b82f6;
+            background: #2563eb;
             color: white;
+            transform: translateY(-2px);
         }
 
+        /* hero 区域 */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 60px 0 40px;
-            gap: 40px;
+            padding: 72px 0 56px;
+            gap: 48px;
             flex-wrap: wrap;
         }
-
         .hero-content {
             flex: 1;
             min-width: 280px;
         }
-
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: 3.8rem;
+            font-weight: 800;
             line-height: 1.2;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-            color: #0f172a;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            color: #0a0c12;
         }
-
         .hero .highlight {
-            color: #3b82f6;
-            border-bottom: 3px solid #bfdbfe;
+            color: #2563eb;
+            background: linear-gradient(120deg, #dbeafe 0%, #dbeafe 40%, transparent 60%);
+            padding: 0 8px;
+            display: inline-block;
         }
-
         .hero p {
             font-size: 1.2rem;
             color: #475569;
-            margin-bottom: 32px;
-            max-width: 550px;
+            margin-bottom: 36px;
+            max-width: 560px;
+            line-height: 1.5;
         }
-
         .hero-buttons {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             flex-wrap: wrap;
         }
-
         .hero-code {
             flex: 1;
-            background: #1e293b;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-            overflow-x: auto;
+            background: #0b1120;
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.2s;
         }
-
+        .hero-code:hover {
+            transform: scale(1.01);
+        }
         .hero-code pre {
             margin: 0;
             color: #e2e8f0;
-            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
-
-        .hero-code .keyword { color: #c084fc; }
+        .hero-code .keyword { color: #c084fc; font-weight: 500; }
         .hero-code .func { color: #6ee7b7; }
-        .hero-code .string { color: #fbbf24; }
-        .hero-code .comment { color: #94a3b8; }
+        .hero-code .string { color: #facc15; }
+        .hero-code .comment { color: #5b6e8c; font-style: italic; }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 48px;
-            color: #0f172a;
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 56px;
+            letter-spacing: -0.02em;
+            color: #0a0c12;
         }
-
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 32px;
+            margin: 48px 0 72px;
         }
-
         .feature-card {
             background: white;
-            padding: 28px 24px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid #eef2f6;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 32px 28px;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f8;
+            transition: all 0.25s ease;
         }
-
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 30px -12px rgba(0,0,0,0.08);
+            border-color: #cbdff2;
         }
-
         .feature-icon {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-bottom: 20px;
+            font-weight: 500;
         }
-
         .feature-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 12px;
             color: #0f172a;
         }
-
         .feature-card p {
             color: #475569;
+            line-height: 1.5;
         }
 
         .code-showcase {
-            background: #0f172a;
-            border-radius: 24px;
-            padding: 40px;
-            margin: 60px 0;
-            color: #e2e8f0;
-            overflow-x: auto;
+            background: #0a0f1c;
+            border-radius: 32px;
+            padding: 48px 44px;
+            margin: 72px 0;
+            transition: all 0.2s;
         }
-
         .code-showcase h2 {
             color: white;
-            margin-bottom: 24px;
-            font-size: 2rem;
+            margin-bottom: 28px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
-
         .code-block {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 20px;
+            background: #111827;
+            border-radius: 20px;
+            padding: 24px;
             overflow-x: auto;
+            border: 1px solid #1f2a3e;
         }
-
         .code-block pre {
             margin: 0;
-            font-family: 'Menlo', monospace;
-            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #eef2ff;
         }
 
         .download-section {
             text-align: center;
-            padding: 60px 0;
-            background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 100%);
-            border-radius: 40px;
-            margin: 40px 0;
+            padding: 64px 48px;
+            background: linear-gradient(135deg, #f8fcff 0%, #edf4fe 100%);
+            border-radius: 48px;
+            margin: 60px 0 40px;
+            border: 1px solid rgba(37,99,235,0.15);
         }
-
         .download-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: #0a0c12;
         }
-
         .download-section p {
-            color: #475569;
-            margin-bottom: 32px;
+            color: #334155;
+            margin-bottom: 36px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1.05rem;
         }
-
         .download-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 24px;
             flex-wrap: wrap;
         }
 
         .footer {
-            border-top: 1px solid #e2e8f0;
-            padding: 30px 0;
+            border-top: 1px solid #e9edf2;
+            padding: 36px 0 32px;
             margin-top: 60px;
             display: flex;
             justify-content: space-between;
-            color: #64748b;
+            align-items: center;
+            color: #5b6e8c;
             flex-wrap: wrap;
             gap: 16px;
         }
-
         .footer a {
-            color: #3b82f6;
+            color: #2563eb;
             text-decoration: none;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                padding: 30px 0;
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 24px;
             }
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             .navbar {
                 flex-direction: column;
@@ -322,6 +333,21 @@
             }
             .nav-links {
                 justify-content: space-between;
+                gap: 20px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .code-showcase {
+                padding: 28px;
+            }
+        }
+        @media (max-width: 540px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .btn {
+                padding: 10px 20px;
             }
         }
     </style>
@@ -337,7 +363,6 @@
                 <a href="#examples" data-key="nav_examples">示例</a>
                 <a href="#download" data-key="nav_download">下载</a>
                 <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" target="_blank" data-key="nav_docs">文档</a>
-                <!-- 新增博客链接 -->
                 <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" target="_blank" data-key="nav_blog">博客</a>
                 <div class="lang-switch">
                     <button class="lang-btn active" data-lang="zh">中文</button>
@@ -345,16 +370,20 @@
                 </div>
             </div>
             <div>
-                <a href="#download" class="btn" data-key="nav_download_btn">免费下载</a>
+                <a href="#download" class="btn btn-primary" data-key="nav_download_btn" style="box-shadow: none;">免费下载</a>
             </div>
         </nav>
 
         <section class="hero">
             <div class="hero-content">
-                <h1><span data-key="hero_title1">像 C 一样简单，</span><br><span class="highlight" data-key="hero_title2">一小时速成</span><span data-key="hero_title3">的编程语言</span></h1>
-                <p data-key="hero_desc">SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明,编程回归乐趣。</p>
+                <h1>
+                    <span data-key="hero_title1">像 C 一样简单，</span><br>
+                    <span class="highlight" data-key="hero_title2">一小时速成</span>
+                    <span data-key="hero_title3">的编程语言</span>
+                </h1>
+                <p data-key="hero_desc">SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，编程回归乐趣。</p>
                 <div class="hero-buttons">
-                    <a href="#download" class="btn" data-key="hero_btn1">下载 SimpLang</a>
+                    <a href="#download" class="btn btn-primary" data-key="hero_btn1">下载 SimpLang IDE</a>
                     <a href="#examples" class="btn btn-outline" data-key="hero_btn2">查看示例</a>
                 </div>
             </div>
@@ -377,29 +406,29 @@
             <h2 class="section-title" data-key="features_title">为什么选择 SimpLang？</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    
+                    <div class="feature-icon">⚡</div>
                     <h3 data-key="feature1_title">极简语法</h3>
-                    <p data-key="feature1_desc">花括号、分号、熟悉的控制流，但无需类型声明。有 C 基础者 30 分钟上手。</p>
+                    <p data-key="feature1_desc">花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手。</p>
                 </div>
                 <div class="feature-card">
-                    
+                    <div class="feature-icon">🌀</div>
                     <h3 data-key="feature2_title">动态类型</h3>
-                    <p data-key="feature2_desc">变量自动推导，支持数字、字符串、数组。专注逻辑，而非内存管理。</p>
+                    <p data-key="feature2_desc">变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理。</p>
                 </div>
                 <div class="feature-card">
-                                        
+                    <div class="feature-icon">📦</div>
                     <h3 data-key="feature4_title">一键打包 EXE</h3>
-                    <p data-key="feature4_desc">写完代码，直接生成独立的 Windows 可执行文件，分享给任何人运行。</p>
+                    <p data-key="feature4_desc">写完代码直接生成独立 Windows 可执行文件，无需任何运行时，分享即运行。</p>
                 </div>
                 <div class="feature-card">
-                    
+                    <div class="feature-icon">♻️</div>
                     <h3 data-key="feature5_title">完整递归支持</h3>
-                    <p data-key="feature5_desc">词法作用域、函数是一等公民，递归、闭包轻松实现。</p>
+                    <p data-key="feature5_desc">词法作用域、函数是一等公民，递归、闭包轻松实现，表达能力强大。</p>
                 </div>
                 <div class="feature-card">
-                    
+                    <div class="feature-icon">🌐</div>
                     <h3 data-key="feature6_title">开源 & 可扩展</h3>
-                    <p data-key="feature6_desc">解释器由 Python 编写，易于修改和嵌入到你的项目中。</p>
+                    <p data-key="feature6_desc">解释器由 Python 编写，易于魔改和嵌入 C/C++ 项目，MIT 协议完全自由。</p>
                 </div>
             </div>
         </section>
@@ -407,132 +436,133 @@
         <section id="examples" class="code-showcase">
             <h2 data-key="examples_title">更多代码示例</h2>
             <div class="code-block">
-                <pre><code><span class="comment">// 数组与循环</span>
-<span class="keyword">var</span> arr[5];
-<span class="keyword">var</span> i = 0;
-<span class="keyword">while</span> (i &lt; 5) {
-    arr[i] = i * i;
-    i = i + 1;
+                <pre><code><span class="comment">// 数组 + 循环 (无类型声明，直观简洁)</span>
+<span class="keyword">var</span> squares[5];
+<span class="keyword">var</span> idx = 0;
+<span class="keyword">while</span> (idx &lt; 5) {
+    squares[idx] = idx * idx;
+    idx = idx + 1;
 }
 <span class="keyword">print</span> <span class="string">"平方数组: "</span>;
-i = 0;
-<span class="keyword">while</span> (i &lt; 5) {
-    <span class="keyword">print</span> arr[i], <span class="string">" "</span>;
-    i = i + 1;
+idx = 0;
+<span class="keyword">while</span> (idx &lt; 5) {
+    <span class="keyword">print</span> squares[idx], <span class="string">" "</span>;
+    idx = idx + 1;
 }
 
-<span class="comment">// 字符串与输入</span>
-<span class="keyword">var</span> name;
+<span class="comment">// 字符串交互与内置转换</span>
+<span class="keyword">var</span> visitor;
 <span class="keyword">print</span> <span class="string">"你叫什么名字？"</span>;
-<span class="keyword">input_str</span> name;
-<span class="keyword">print</span> <span class="string">"你好, "</span>, name, <span class="string">"！"</span>;
+<span class="keyword">input_str</span> visitor;
+<span class="keyword">print</span> <span class="string">"你好, "</span>, visitor, <span class="string">"！欢迎使用 SimpLang"</span>;
 
-<span class="comment">// 内置函数</span>
-<span class="keyword">var</span> numStr = <span class="string">"123"</span>;
-<span class="keyword">var</span> num = to_int(numStr);
-<span class="keyword">print</span> <span class="string">"转换后的数字: "</span>, num;</code></pre>
+<span class="comment">// 内置 to_int 类型转换</span>
+<span class="keyword">var</span> ageStr = <span class="string">"28"</span>;
+<span class="keyword">var</span> age = to_int(ageStr);
+<span class="keyword">print</span> <span class="string">"年龄数字: "</span>, age;</code></pre>
             </div>
         </section>
 
         <section id="download" class="download-section">
             <h2 data-key="download_title">立即开始使用 SimpLang</h2>
-            <p data-key="download_desc">命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享。</p>
+            <p data-key="download_desc">包含图形化 IDE + 命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享你的程序。</p>
             <div class="download-buttons">
-                <a href="" class="btn" style="padding: 14px 36px; font-size: 1.1rem;" data-key="download_btn">下载 SimpLang IDE (Windows)</a>
-                <a href="https://jie240.github.io/SimpleLang-s-manual/" target="_blank" class="btn btn-outline" style="padding: 14px 36px; font-size: 1.1rem;" data-key="download_docs_btn">查看文档</a>
+                <!-- 有效下载链接 -->
+                <a href="https://github.com/jie240/SimpleLang/releases/download/v1.00/SimpleLangSetup.exe" 
+                   class="btn btn-primary" 
+                   style="padding: 14px 42px; font-size: 1.1rem; background: #0f172a; box-shadow: 0 8px 18px rgba(0,0,0,0.08);">
+                    ⬇️ 下载 SimpLang IDE (Windows)
+                </a>
+                <a href="https://jie240.github.io/SimpleLang-s-manual/" target="_blank" 
+                   class="btn btn-outline" 
+                   style="padding: 14px 36px; font-size: 1.05rem;">
+                    📖 查看文档
+                </a>
             </div>
-            <p style="margin-top: 24px; font-size: 0.9rem;" data-key="download_note">当前版本 v1.0.0 · 需要 Windows 7 及以上 · 无需安装 Python</p>
+            <p style="margin-top: 28px; font-size: 0.85rem; color: #4a5b7a;" data-key="download_note">
+                当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需安装 Python 环境 · 开箱即用
+            </p>
         </section>
 
         <footer class="footer">
             <div data-key="footer_copyright">© 2025 SimpLang 团队 · 基于 MIT 协议开源</div>
             <div>
                 <a href="https://github.com/jie240/SimpleLang" target="_blank">GitHub</a> · 
-                <a>问题反馈:137196836@qq.com</a> 
+                <a href="mailto:137196836@qq.com">问题反馈:137196836@qq.com</a> 
             </div>
         </footer>
     </div>
 
     <script>
-        // 多语言文本库
+        // 完整中英文语言包 (修正英文描述与特性对齐)
         const translations = {
             zh: {
-                // 导航
                 nav_features: "特性",
                 nav_examples: "示例",
                 nav_download: "下载",
                 nav_docs: "文档",
-                nav_blog: "博客",          // 新增博客翻译
+                nav_blog: "博客",
                 nav_download_btn: "免费下载",
-                // Hero
                 hero_title1: "像 C 一样简单，",
                 hero_title2: "一小时速成",
                 hero_title3: "的编程语言",
                 hero_desc: "SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，让编程回归乐趣。",
                 hero_btn1: "下载 SimpLang IDE",
                 hero_btn2: "查看示例",
-                // Features
                 features_title: "为什么选择 SimpLang？",
                 feature1_title: "极简语法",
-                feature1_desc: "花括号、分号、熟悉的控制流，但无需类型声明。有 C 基础者 30 分钟上手。",
+                feature1_desc: "花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手。",
                 feature2_title: "动态类型",
-                feature2_desc: "变量自动推导，支持数字、字符串、数组。专注逻辑，而非内存管理。",
+                feature2_desc: "变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理。",
                 feature3_title: "自带 IDE",
                 feature3_desc: "语法高亮、一键运行、输入对话框，开箱即用的图形化开发环境。",
                 feature4_title: "一键打包 EXE",
-                feature4_desc: "写完代码，直接生成独立的 Windows 可执行文件，分享给任何人运行。",
+                feature4_desc: "写完代码直接生成独立 Windows 可执行文件，分享给任何人运行，无需依赖。",
                 feature5_title: "完整递归支持",
-                feature5_desc: "词法作用域、函数是一等公民，递归、闭包轻松实现。",
+                feature5_desc: "词法作用域、函数是一等公民，递归、闭包轻松实现，表达能力强大。",
                 feature6_title: "开源 & 可扩展",
-                feature6_desc: "解释器由 Python 编写，易于修改和嵌入到你的项目中。",
-                // Examples
+                feature6_desc: "解释器由 Python 编写，易于修改和嵌入 C/C++ 项目，MIT 协议完全自由。",
                 examples_title: "更多代码示例",
-                // Download
                 download_title: "立即开始使用 SimpLang",
-                download_desc: "命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享。",
-                download_btn: " 下载 SimpLang  (Windows)",
+                download_desc: "包含图形化 IDE + 命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享你的程序。",
+                download_btn: "下载 SimpLang IDE (Windows)",
                 download_docs_btn: "查看文档",
-                download_note: "当前版本 v1.0.0 · 需要 Windows 7 及以上 · 无需安装 Python",
-                // Footer
-                footer_copyright: "© 2025 SimpLang 团队 · 基于 MIT 协议开源",
-                footer_feedback: "问题反馈",
-                footer_contribute: "贡献指南"
+                download_note: "当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需安装 Python 环境 · 开箱即用",
+                footer_copyright: "© 2025 SimpLang 团队 · 基于 MIT 协议开源"
             },
             en: {
                 nav_features: "Features",
                 nav_examples: "Examples",
                 nav_download: "Download",
                 nav_docs: "Docs",
-                nav_blog: "Blog",          // 新增博客翻译
+                nav_blog: "Blog",
                 nav_download_btn: "Free Download",
                 hero_title1: "Simple as C, ",
                 hero_title2: "Learn in 1 Hour",
                 hero_title3: "",
-                hero_desc: "SimpLang keeps C's clean syntax, removes complex pointers and type declarations. Built-in IDE, one-click EXE packaging, bringing fun back to programming.",
+                hero_desc: "SimpLang keeps C's clean syntax, removes pointers and type clutter. Built-in IDE, one-click EXE packaging, bring the fun back to coding.",
                 hero_btn1: "Download SimpLang IDE",
                 hero_btn2: "View Examples",
                 features_title: "Why SimpLang?",
-                feature1_title: "Minimal Syntax",
-                feature1_desc: "Curly braces, semicolons, familiar control flow, but no type declarations. 30 minutes if you know C.",
+                feature1_title: "Minimalist Syntax",
+                feature1_desc: "Curly braces, semicolons, familiar flow without type declarations. 30 mins if you know C.",
                 feature2_title: "Dynamic Typing",
-                feature2_desc: "Auto type inference, supports numbers, strings, arrays. Focus on logic, not memory management.",
+                feature2_desc: "Auto type inference, numbers, strings, arrays. Focus on logic, not memory.",
                 feature3_title: "Built-in IDE",
-                feature3_desc: "Syntax highlighting, one-click run, input dialog, graphical dev environment out of the box.",
+                feature3_desc: "Syntax highlighting, one-click run, input dialog — GUI dev environment ready.",
                 feature4_title: "One-click EXE",
-                feature4_desc: "After writing code, directly generate standalone Windows executable, share with anyone.",
+                feature4_desc: "After coding, directly generate standalone Windows executable, share anywhere.",
                 feature5_title: "Full Recursion",
-                feature5_desc: "Lexical scoping, functions as first-class citizens, easy recursion and closures.",
+                feature5_desc: "Lexical scoping, first-class functions, easy recursion & closures.",
                 feature6_title: "Open Source & Extensible",
-                feature6_desc: "Interpreter written in Python, easy to modify and embed in your projects.",
+                feature6_desc: "Interpreter written in Python, easy to modify and embed in your projects. MIT license.",
                 examples_title: "More Code Examples",
                 download_title: "Get Started with SimpLang",
-                download_desc: "Includes full IDE and command-line interpreter, supports Windows / macOS / Linux. One-click package, share instantly.",
+                download_desc: "Includes full IDE + CLI interpreter, supports Windows / macOS / Linux. One-click share as EXE.",
                 download_btn: "Download SimpLang IDE (Windows)",
                 download_docs_btn: "Read Docs",
-                download_note: "Current version v1.0.0 · Requires Windows 7 or later · No Python installation needed",
-                footer_copyright: "© 2025 SimpLang Team · Open source under MIT",
-                footer_feedback: "Feedback",
-                footer_contribute: "Contribute"
+                download_note: "Version v1.0.0 · Works on Windows 7+ · No Python required · Out-of-the-box",
+                footer_copyright: "© 2025 SimpLang Team · Open source under MIT"
             }
         };
 
@@ -540,60 +570,47 @@ i = 0;
 
         function setLanguage(lang) {
             currentLang = lang;
-            // 更新所有带 data-key 的元素文本
+            // 遍历所有带 data-key 的元素
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang][key]) {
-                    // 保留内部可能存在的图标或特殊字符
-                    if (el.tagName === 'A' && (key === 'nav_docs' || key === 'nav_blog')) {
-                        // 特殊处理：保持链接不变，只改文本
+                    if (el.tagName === 'A' && (key === 'nav_docs' || key === 'nav_blog' || key === 'nav_features' || key === 'nav_examples' || key === 'nav_download')) {
                         el.textContent = translations[lang][key];
                     } else if (el.tagName === 'BUTTON') {
-                        // 按钮文字
                         el.textContent = translations[lang][key];
                     } else {
-                        // 普通元素，但可能需要保留子元素？这里简单处理，但 hero_title 有三个span，需要分别处理
-                        // 对于普通元素直接替换 innerText 会丢失内部结构，但我们的 data-key 都在叶子节点或单独元素上，可行
-                        // 注意 hero 标题是分开的 span，每个都有 data-key，所以没问题
                         el.innerText = translations[lang][key];
                     }
                 }
             });
-            // 更新按钮 active 样式
+            // 更新lang切换按钮激活样式
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
-            // 更新 html lang 属性
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
         }
 
-        // 绑定语言切换事件
         document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const lang = btn.getAttribute('data-lang');
-                setLanguage(lang);
+            btn.addEventListener('click', () => {
+                setLanguage(btn.getAttribute('data-lang'));
             });
         });
 
-        // 初始化中文
-        setLanguage('zh');
-
-        // 平滑滚动 (修复内部锚点)
+        // 平滑锚点 + 避免默认跳转生硬
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === "#" || href === "") return;
-                const target = document.querySelector(href);
+            anchor.addEventListener('click', function(e) {
+                const hash = this.getAttribute('href');
+                if (hash === "#" || hash === "") return;
+                const target = document.querySelector(hash);
                 if (target) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // 初始化默认中文
+        setLanguage('zh');
     </script>
 </body>
 </html>
