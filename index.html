@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SimpLang - 极简 · 速成 · 可打包 | 新一代脚本语言</title>
+    <title>SimpLang - 极简 · 速成 · 可打包 | 轻量级编程语言</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -28,7 +28,6 @@
             padding: 0 32px;
         }
 
-        /* navbar 高级感 */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -37,7 +36,6 @@
             border-bottom: 1px solid #eef2f6;
             flex-wrap: wrap;
             gap: 20px;
-            backdrop-filter: blur(0px);
             background: rgba(255,255,255,0.96);
         }
 
@@ -114,7 +112,6 @@
             border: none;
             font-size: 0.95rem;
             letter-spacing: -0.2px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         .btn-primary {
             background: #2563eb;
@@ -137,7 +134,6 @@
             transform: translateY(-2px);
         }
 
-        /* hero 区域 */
         .hero {
             display: flex;
             align-items: center;
@@ -288,7 +284,7 @@
         .download-section p {
             color: #334155;
             margin-bottom: 36px;
-            max-width: 600px;
+            max-width: 640px;
             margin-left: auto;
             margin-right: auto;
             font-size: 1.05rem;
@@ -318,6 +314,17 @@
         }
         .footer a:hover {
             text-decoration: underline;
+        }
+
+        .badge-light {
+            background: #eef2ff;
+            color: #2563eb;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
         }
 
         @media (max-width: 880px) {
@@ -362,8 +369,8 @@
                 <a href="#features" data-key="nav_features">特性</a>
                 <a href="#examples" data-key="nav_examples">示例</a>
                 <a href="#download" data-key="nav_download">下载</a>
-                <a href="https://jie240.github.io/SimpleLangIDE-s-manual/" target="_blank" data-key="nav_docs">文档</a>
-                <a href="https://jie240.github.io/SimpleLangIDE-s-Blog/" target="_blank" data-key="nav_blog">博客</a>
+                <a href="https://jie240.github.io/SimpleLang-s-manual/" target="_blank" data-key="nav_docs">文档</a>
+                <a href="https://jie240.github.io/SimpleLang-s-Blog/" target="_blank" data-key="nav_blog">博客</a>
                 <div class="lang-switch">
                     <button class="lang-btn active" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="en">English</button>
@@ -381,9 +388,9 @@
                     <span class="highlight" data-key="hero_title2">一小时速成</span>
                     <span data-key="hero_title3">的编程语言</span>
                 </h1>
-                <p data-key="hero_desc">SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，编程回归乐趣。</p>
+                <p data-key="hero_desc">SimpLang 是一款轻量级脚本语言，保留 C 的简洁语法，去掉指针与类型声明。自带解释器环境与 EXE 打包工具，让编程真正回归乐趣。</p>
                 <div class="hero-buttons">
-                    <a href="#download" class="btn btn-primary" data-key="hero_btn1">下载 SimpLang IDE</a>
+                    <a href="#download" class="btn btn-primary" data-key="hero_btn1">下载 SimpLang 环境</a>
                     <a href="#examples" class="btn btn-outline" data-key="hero_btn2">查看示例</a>
                 </div>
             </div>
@@ -406,29 +413,28 @@
             <h2 class="section-title" data-key="features_title">为什么选择 SimpLang？</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
                     <h3 data-key="feature1_title">极简语法</h3>
-                    <p data-key="feature1_desc">花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手。</p>
+                    <p data-key="feature1_desc">花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手，无编程经验也能快速入门。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🌀</div>
-                    <h3 data-key="feature2_title">动态类型</h3>
-                    <p data-key="feature2_desc">变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理。</p>
+                    <h3 data-key="feature2_title">动态类型系统</h3>
+                    <p data-key="feature2_desc">变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理与类型焦虑。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📦</div>
                     <h3 data-key="feature4_title">一键打包 EXE</h3>
-                    <p data-key="feature4_desc">写完代码直接生成独立 Windows 可执行文件，无需任何运行时，分享即运行。</p>
+                    <p data-key="feature4_desc">内置打包器，写完代码直接生成独立 Windows 可执行文件，无需任何运行时，分享即运行。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">♻️</div>
-                    <h3 data-key="feature5_title">完整递归支持</h3>
-                    <p data-key="feature5_desc">词法作用域、函数是一等公民，递归、闭包轻松实现，表达能力强大。</p>
+                    <h3 data-key="feature5_title">完整递归 + 闭包</h3>
+                    <p data-key="feature5_desc">词法作用域，函数是一等公民，递归、闭包轻松实现，支持高阶函数，表达能力强大。</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3 data-key="feature6_title">开源 & 可扩展</h3>
-                    <p data-key="feature6_desc">解释器由 Python 编写，易于魔改和嵌入 C/C++ 项目，MIT 协议完全自由。</p>
+                    <h3 data-key="feature6_title">轻量解释器环境</h3>
+                    <p data-key="feature6_desc">纯 Python 编写的解释器，跨平台运行 (Windows/Linux/macOS)，易于嵌入或定制，MIT 开源协议。</p>
+                </div>
+                <div class="feature-card">
+                    <h3 data-key="feature7_title">开箱即用工具链</h3>
+                    <p data-key="feature7_desc">提供命令行 REPL、脚本执行器、打包工具，无需额外配置，下载即拥有完整开发环境。</p>
                 </div>
             </div>
         </section>
@@ -459,28 +465,49 @@ idx = 0;
 <span class="comment">// 内置 to_int 类型转换</span>
 <span class="keyword">var</span> ageStr = <span class="string">"28"</span>;
 <span class="keyword">var</span> age = to_int(ageStr);
-<span class="keyword">print</span> <span class="string">"年龄数字: "</span>, age;</code></pre>
+<span class="keyword">print</span> <span class="string">"年龄数字: "</span>, age;
+
+<span class="comment">// 闭包示例</span>
+<span class="keyword">func</span> <span class="func">makeCounter</span>() {
+    <span class="keyword">var</span> count = 0;
+    <span class="keyword">func</span> <span class="func">inner</span>() {
+        count = count + 1;
+        <span class="keyword">return</span> count;
+    }
+    <span class="keyword">return</span> inner;
+}
+<span class="keyword">var</span> counter = makeCounter();
+<span class="keyword">print</span> counter();  <span class="comment">// 输出 1</span>
+<span class="keyword">print</span> counter();  <span class="comment">// 输出 2</span></code></pre>
             </div>
         </section>
 
         <section id="download" class="download-section">
             <h2 data-key="download_title">立即开始使用 SimpLang</h2>
-            <p data-key="download_desc">包含图形化 IDE + 命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享你的程序。</p>
+            <p data-key="download_desc">包含命令行解释器 (simp)、打包工具 (packager) 及标准库，支持 Windows / macOS / Linux。写脚本，一键生成 EXE，分享你的程序。</p>
             <div class="download-buttons">
-                <!-- 有效下载链接 -->
+                <!-- 有效下载链接：直接指向 github release 安装包 -->
                 <a href="https://github.com/jie240/SimpleLang/releases/download/v1.00/SimpleLangSetup.exe" 
                    class="btn btn-primary" 
                    style="padding: 14px 42px; font-size: 1.1rem; background: #0f172a; box-shadow: 0 8px 18px rgba(0,0,0,0.08);">
-                    ⬇️ 下载 SimpLang IDE (Windows)
+                    ⬇️ 下载 SimpLang 环境 (Windows)
+                </a>
+                <a href="https://github.com/jie240/SimpleLang" target="_blank" 
+                   class="btn btn-outline" 
+                   style="padding: 14px 36px; font-size: 1.05rem;">
+                    GitHub 源码
                 </a>
                 <a href="https://jie240.github.io/SimpleLang-s-manual/" target="_blank" 
                    class="btn btn-outline" 
                    style="padding: 14px 36px; font-size: 1.05rem;">
-                    📖 查看文档
+                    📖 完整文档
                 </a>
             </div>
             <p style="margin-top: 28px; font-size: 0.85rem; color: #4a5b7a;" data-key="download_note">
-                当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需安装 Python 环境 · 开箱即用
+                当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需任何额外运行时 · 开箱即用
+            </p>
+            <p style="margin-top: 12px; font-size: 0.8rem; color: #5b6e8c;">
+                macOS / Linux 用户请从 GitHub  Releases 下载对应版本或通过源码运行
             </p>
         </section>
 
@@ -494,7 +521,7 @@ idx = 0;
     </div>
 
     <script>
-        // 完整中英文语言包 (修正英文描述与特性对齐)
+        // 完整中英文语言包 (突出「环境/解释器」而非 IDE)
         const translations = {
             zh: {
                 nav_features: "特性",
@@ -506,28 +533,30 @@ idx = 0;
                 hero_title1: "像 C 一样简单，",
                 hero_title2: "一小时速成",
                 hero_title3: "的编程语言",
-                hero_desc: "SimpLang 保留了 C 的简洁语法，去除了复杂的指针和类型声明。自带 IDE，一键打包 EXE，让编程回归乐趣。",
-                hero_btn1: "下载 SimpLang IDE",
+                hero_desc: "SimpLang 是一款轻量级脚本语言，保留 C 的简洁语法，去掉指针与类型声明。自带解释器环境与 EXE 打包工具，让编程真正回归乐趣。",
+                hero_btn1: "下载 SimpLang 环境",
                 hero_btn2: "查看示例",
                 features_title: "为什么选择 SimpLang？",
                 feature1_title: "极简语法",
-                feature1_desc: "花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手。",
-                feature2_title: "动态类型",
-                feature2_desc: "变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理。",
-                feature3_title: "自带 IDE",
-                feature3_desc: "语法高亮、一键运行、输入对话框，开箱即用的图形化开发环境。",
+                feature1_desc: "花括号、分号、熟悉的控制流，无需类型声明。有 C 基础者 30 分钟完全上手，无编程经验也能快速入门。",
+                feature2_title: "动态类型系统",
+                feature2_desc: "变量自动推导，数字、字符串、数组原生支持。专注业务逻辑，告别内存管理与类型焦虑。",
+                feature3_title: "轻量解释器环境",
+                feature3_desc: "纯 Python 编写的解释器，跨平台，易于嵌入或定制，MIT 开源协议。",
                 feature4_title: "一键打包 EXE",
-                feature4_desc: "写完代码直接生成独立 Windows 可执行文件，分享给任何人运行，无需依赖。",
-                feature5_title: "完整递归支持",
-                feature5_desc: "词法作用域、函数是一等公民，递归、闭包轻松实现，表达能力强大。",
-                feature6_title: "开源 & 可扩展",
-                feature6_desc: "解释器由 Python 编写，易于修改和嵌入 C/C++ 项目，MIT 协议完全自由。",
+                feature4_desc: "内置打包器，写完代码直接生成独立 Windows 可执行文件，无需任何运行时，分享即运行。",
+                feature5_title: "完整递归 + 闭包",
+                feature5_desc: "词法作用域，函数是一等公民，递归、闭包轻松实现，支持高阶函数。",
+                feature6_title: "开箱即用工具链",
+                feature6_desc: "提供命令行 REPL、脚本执行器、打包工具，无需额外配置，下载即拥有完整开发环境。",
+                feature7_title: "开源 & 可扩展",
+                feature7_desc: "解释器由 Python 编写，易于修改和嵌入 C/C++/Python 项目，完全自由。",
                 examples_title: "更多代码示例",
                 download_title: "立即开始使用 SimpLang",
-                download_desc: "包含图形化 IDE + 命令行解释器，支持 Windows / macOS / Linux。一键打包，即刻分享你的程序。",
-                download_btn: "下载 SimpLang IDE (Windows)",
-                download_docs_btn: "查看文档",
-                download_note: "当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需安装 Python 环境 · 开箱即用",
+                download_desc: "包含命令行解释器 (simp)、打包工具 (packager) 及标准库，支持 Windows / macOS / Linux。写脚本，一键生成 EXE，分享你的程序。",
+                download_btn: "下载 SimpLang 环境 (Windows)",
+                download_docs_btn: "完整文档",
+                download_note: "当前版本 v1.0.0 · 兼容 Windows 7/10/11 · 无需任何额外运行时 · 开箱即用",
                 footer_copyright: "© 2025 SimpLang 团队 · 基于 MIT 协议开源"
             },
             en: {
@@ -540,28 +569,30 @@ idx = 0;
                 hero_title1: "Simple as C, ",
                 hero_title2: "Learn in 1 Hour",
                 hero_title3: "",
-                hero_desc: "SimpLang keeps C's clean syntax, removes pointers and type clutter. Built-in IDE, one-click EXE packaging, bring the fun back to coding.",
-                hero_btn1: "Download SimpLang IDE",
+                hero_desc: "SimpLang is a lightweight scripting language that keeps C's clean syntax, removes pointers and type clutter. Built-in interpreter and EXE packager, bringing fun back to coding.",
+                hero_btn1: "Download SimpLang",
                 hero_btn2: "View Examples",
                 features_title: "Why SimpLang?",
-                feature1_title: "Minimalist Syntax",
+                feature1_title: "Minimal Syntax",
                 feature1_desc: "Curly braces, semicolons, familiar flow without type declarations. 30 mins if you know C.",
                 feature2_title: "Dynamic Typing",
                 feature2_desc: "Auto type inference, numbers, strings, arrays. Focus on logic, not memory.",
-                feature3_title: "Built-in IDE",
-                feature3_desc: "Syntax highlighting, one-click run, input dialog — GUI dev environment ready.",
-                feature4_title: "One-click EXE",
-                feature4_desc: "After coding, directly generate standalone Windows executable, share anywhere.",
-                feature5_title: "Full Recursion",
-                feature5_desc: "Lexical scoping, first-class functions, easy recursion & closures.",
-                feature6_title: "Open Source & Extensible",
-                feature6_desc: "Interpreter written in Python, easy to modify and embed in your projects. MIT license.",
+                feature3_title: "Lightweight Interpreter",
+                feature3_desc: "Pure Python interpreter, cross-platform, easy to embed or customize. MIT license.",
+                feature4_title: "One-click EXE Packager",
+                feature4_desc: "Built-in packager: generate standalone Windows executable directly, no runtime needed.",
+                feature5_title: "Recursion & Closures",
+                feature5_desc: "Lexical scoping, first-class functions, easy recursion and closures.",
+                feature6_title: "Complete Toolchain",
+                feature6_desc: "REPL, script runner, packager – everything included, zero config.",
+                feature7_title: "Open Source & Extensible",
+                feature7_desc: "Written in Python, easy to modify and embed in C/C++/Python projects.",
                 examples_title: "More Code Examples",
                 download_title: "Get Started with SimpLang",
-                download_desc: "Includes full IDE + CLI interpreter, supports Windows / macOS / Linux. One-click share as EXE.",
-                download_btn: "Download SimpLang IDE (Windows)",
+                download_desc: "Includes CLI interpreter (simp), packager, and standard library. Supports Windows/macOS/Linux. Write scripts, generate EXE, share anywhere.",
+                download_btn: "Download SimpLang (Windows)",
                 download_docs_btn: "Read Docs",
-                download_note: "Version v1.0.0 · Works on Windows 7+ · No Python required · Out-of-the-box",
+                download_note: "Version v1.0.0 · Windows 7+ · No runtime required · Ready to use",
                 footer_copyright: "© 2025 SimpLang Team · Open source under MIT"
             }
         };
@@ -570,7 +601,6 @@ idx = 0;
 
         function setLanguage(lang) {
             currentLang = lang;
-            // 遍历所有带 data-key 的元素
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang][key]) {
@@ -583,7 +613,6 @@ idx = 0;
                     }
                 }
             });
-            // 更新lang切换按钮激活样式
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -596,7 +625,6 @@ idx = 0;
             });
         });
 
-        // 平滑锚点 + 避免默认跳转生硬
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const hash = this.getAttribute('href');
@@ -609,7 +637,6 @@ idx = 0;
             });
         });
 
-        // 初始化默认中文
         setLanguage('zh');
     </script>
 </body>
